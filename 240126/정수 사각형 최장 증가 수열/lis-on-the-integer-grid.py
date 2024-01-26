@@ -19,13 +19,15 @@ pos.sort()
 
 dx, dy = [0,0,1,-1], [1,-1,0,0]
 
+# dp값 갱신
 for num, x, y in pos:
     for idx in range(4):
         nx, ny = x+dx[idx], y+dy[idx]
         if nx<0 or nx>=n or ny<0 or ny>=n:
             continue
+        # 최대값갱신 점화식: 이전값 +1과 원래값 중 최댓값
         if graph[nx][ny]>num:
-            dp[nx][ny] = dp[x][y]+1
+            dp[nx][ny] = max(dp[x][y]+1, dp[nx][ny])
 
 def find_max(dp):
     max_num = 0
