@@ -31,9 +31,14 @@ for x in range(1,n):
         # 왼쪽에서 오른쪽으로 
         left_right = max(graph[x][y], cell[x][y-1][1]) - min(graph[x][y], cell[x][y-1][0])
         # x,y는 위와 왼쪽에서 올 수 있는데 기존 값과 비교해서 차이가 적은 값을 갱신
-        if up_down > left_right:
+        if up_down >= left_right:
             cell[x][y] = [min(graph[x][y], cell[x][y-1][0]), max(graph[x][y], cell[x][y-1][1])]
         else:
             cell[x][y] = [min(graph[x][y], cell[x-1][y][0]), max(graph[x][y], cell[x-1][y][1])]
 
 print(cell[n-1][n-1][1]-cell[n-1][n-1][0])
+
+# for x in range(n):
+#     for y in range(n):
+#         print(cell[x][y], end = ' ')
+#     print()
