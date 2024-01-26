@@ -9,7 +9,7 @@ def in_range(x,y):
     return 0<=x<n and 0<=y<n
 
 # 피보나치 수열과 비슷
-# 해당 위치에서 최대
+# x,y에서 시작해서 얼마나 많이 갈 수 있는지
 def find_max(x,y):
     # 이미 값이 있다면 바로 반환
     if dp[x][y] !=-1:
@@ -21,6 +21,7 @@ def find_max(x,y):
     # 4 방향을 살펴보며 최적의 칸 수를 계산
     for dx,dy in zip(dxs, dys):
         nx, ny = x+dx, y+dy
+        # 이동했다 -> 이전에 이동한 값에서의 최대값 +1, 이동이 없다면 best=1
         if in_range(nx,ny) and graph[nx][ny]>graph[x][y]:
             best = max(best, find_max(nx,ny) +1)
     dp[x][y] = best
@@ -30,4 +31,5 @@ ans =0
 for i in range(n):
     for j in range(n):
         ans = max(ans, find_max(i,j))
+print(dp)
 print(ans)
