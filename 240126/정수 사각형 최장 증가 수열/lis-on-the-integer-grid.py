@@ -1,6 +1,7 @@
 # 각 칸에 적혀있는 수가 증가하는 순서대로 진행해야한다 -> 조건
 # 각 칸에 적혀있는 수들 중에서 작은값부터 순서대로 dp 값을 갱신
 # 칸에 적혀있는 수가 작은 것부터 오름차순 정렬하여 순서대로 dp값을 갱신!
+# 시간 복잡도 O(N^2logN), 메모리 O(N^2)
 global n
 n = int(input())
 graph = [list(map(int, input().split())) for _ in range(n)]
