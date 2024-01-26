@@ -27,6 +27,7 @@ for num, x, y in pos:
             dp[nx][ny]+=1
 
 def find_max(dp):
+    global n
     max_num = 0
     for x in range(n):
         for y in range(n):
