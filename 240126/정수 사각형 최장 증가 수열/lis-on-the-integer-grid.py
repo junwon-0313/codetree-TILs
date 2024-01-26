@@ -1,40 +1,32 @@
-# 각 칸에 적혀있는 수가 증가하는 순서대로 진행해야한다 -> 조건
-# 각 칸에 적혀있는 수들 중에서 작은값부터 순서대로 dp 값을 갱신
-# 칸에 적혀있는 수가 작은 것부터 오름차순 정렬하여 순서대로 dp값을 갱신!
-# 시간 복잡도 O(N^2logN), 메모리 O(N^2)
-global n
+# Memoization
+# x,y에서 출발하여 조건을 만족하며 도달할 수 있는 칸의 수 중 최대 칸의 수
 n = int(input())
 graph = [list(map(int, input().split())) for _ in range(n)]
 
-pos = []
-# dp를 1로 초기화: 하나는 무조건 존재
-dp = [[1]*n for _ in range(n)]
+dp = [[-1]*n for _ in range(n)]
 
-# 그래프 안의 값으로 오름차순 정렬을 하기 위해서 
-for x in range(n):
-    for y in range(n):
-        # 값, 행, 열
-        pos.append((graph[x][y], x, y))
+def in_range(x,y):
+    return 0<=x<n and 0<=y<n
 
-pos.sort()
+# 피보나치 수열과 비슷
+# 해당 위치에서 최대
+def find_max(x,y):
+    # 이미 값이 있다면 바로 반환
+    if dp[x][y] !=-1:
+        return dp[x][y]
 
-dx, dy = [0,0,1,-1], [1,-1,0,0]
+    best = 1
+    dxs, dys = [-1,1,0,0], [0,0,1,-1]
 
-# dp값 갱신
-for num, x, y in pos:
-    for idx in range(4):
-        nx, ny = x+dx[idx], y+dy[idx]
-        if nx<0 or nx>=n or ny<0 or ny>=n:
-            continue
-        # 최대값갱신 점화식: 이전값 +1과 원래값 중 최댓값
-        if graph[nx][ny]>num:
-            dp[nx][ny] = max(dp[x][y]+1, dp[nx][ny])
+    # 4 방향을 살펴보며 최적의 칸 수를 계산
+    for dx,dy in zip(dxs, dys):
+        nx, ny = x+dx, y+dys
+        if in_range(nx,ny) and graph[nx][ny]>graph[x][y]:
+            best = max(best, find_max(nx,ny) +1)
+    dp[x][y] = best
 
-def find_max(dp):
-    max_num = 0
-    for x in range(n):
-        for y in range(n):
-            if dp[x][y] > max_num:
-                max_num = dp[x][y]
-    return max_num
-print(find_max(dp))
+ans =0
+for i in range(n):
+    for j in range(n):
+        ans = max(ans, find_max(i,j))
+print(ans)
