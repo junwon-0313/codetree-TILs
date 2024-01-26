@@ -4,12 +4,16 @@
 n = int(input())
 graph = [list(map(int, input().split())) for _ in range(n)]
 
-def initialize(dp):
+def initialize(dp, lower):
     global n
     dp[0][0]=graph[0][0]
     for x in range(1,n):
+        if graph[x][0]<lower or dp[x-1][0]==0:
+            continue
         dp[x][0] = max(dp[x-1][0], graph[x][0])
     for y in range(1,n):
+        if graph[0][y]<lower or dp[0][y-1]==0:
+            continue
         dp[0][y] = max(dp[0][y-1], graph[0][y])
 
 score = []
@@ -19,7 +23,7 @@ for lower in range(1, 101):
         continue
     # 초기화
     dp = [[0]*n for _ in range(n)]
-    initialize(dp)
+    initialize(dp, lower)
     # 이동하면서 lower보다 큰 값 중만 통과하면서 가장 큰 수가 가장 작게
     for x in range(1,n):
         for y in range(1,n):
