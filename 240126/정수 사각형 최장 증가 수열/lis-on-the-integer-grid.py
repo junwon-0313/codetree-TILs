@@ -20,10 +20,11 @@ def find_max(x,y):
 
     # 4 방향을 살펴보며 최적의 칸 수를 계산
     for dx,dy in zip(dxs, dys):
-        nx, ny = x+dx, y+dys
+        nx, ny = x+dx, y+dy
         if in_range(nx,ny) and graph[nx][ny]>graph[x][y]:
             best = max(best, find_max(nx,ny) +1)
     dp[x][y] = best
+    return dp[x][y]
 
 ans =0
 for i in range(n):
