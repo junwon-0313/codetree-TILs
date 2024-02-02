@@ -22,7 +22,6 @@ for i in range(t):
     nx,ny = x+dx[idx], y+dy[idx]
     if in_range(nx,ny):
         x,y = nx,ny
-        print('@')
     else:
         idx = 3-idx
 print(x+1, y+1)
