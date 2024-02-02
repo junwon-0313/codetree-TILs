@@ -13,7 +13,7 @@ elif d =='R':
     idx=2
 
 # 상 좌 우 하
-dx, dy = [0,-1,1,0], [-1,0,0,1]
+dx, dy = [-1,0,0,1], [0,-1,1,0]
 def in_range(x,y):
     return 0<=x<n and 0<=y<n
 
@@ -24,4 +24,4 @@ for i in range(t):
         x,y = nx,ny
     else:
         idx = 3-idx
-print(x, y)
+    print(x,y)
