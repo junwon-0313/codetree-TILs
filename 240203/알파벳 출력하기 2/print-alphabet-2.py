@@ -6,5 +6,5 @@ for idx in range(n):
     print('  '*idx, end = '')
     for _ in range(n-idx):
         print(lst[cnt], end = ' ')
-        cnt= (cnt+1)%24
+        cnt= (cnt+1)%26
     print()
