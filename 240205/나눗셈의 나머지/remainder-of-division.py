@@ -1,7 +1,7 @@
 a, b = map(int, input().split())
 lst = [0]*b
 while True:
-    if a==0:
+    if a<b:
         break
     r = a%b
     lst[r]+=1
