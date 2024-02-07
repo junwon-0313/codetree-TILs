@@ -9,13 +9,13 @@ if K<=N:
     di= 0 
 elif N<K<=2*N:
     x,y = K%N-1, N-1
-    di =1
+    di =3
 elif 2*N<K<=3*N:
     x, y = N-1, N-1-(K%N)+1
     di = 2
 else:
     x, y =  N-1-(K%N)+1, 0
-    di =3
+    di =1
 
 def in_range(x, y):
     return 0<=x<N and 0<=y<N
