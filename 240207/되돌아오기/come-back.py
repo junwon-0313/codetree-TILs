@@ -10,7 +10,7 @@ direction['S'] = [0,1]
 direction['N'] = [0,-1]
 cnt = 0
 for di, dis in move_lst:
-    for x in range(int(dis)):
+    for _ in range(int(dis)):
         cnt +=1
         x, y = x+direction[di][0], y+direction[di][1]
         if x==0 and y==0:
