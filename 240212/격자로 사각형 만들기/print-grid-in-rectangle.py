@@ -1,7 +1,7 @@
 n = int(input())
 graph = [[0]*n for _ in range(n)]
 def initialize():
-    for x in range(5):
+    for x in range(n):
         graph[x][0]=1
         graph[0][x]=1
 
