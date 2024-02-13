@@ -37,20 +37,20 @@ def copy(graph):
 
 def bomb1(graph, x, y):
     dx, dy = [-2,-1,1,2],[0,0,0,0]
-    for idx in range(n):
+    for idx in range(4):
         nx, ny = x+dx[idx], y+dy[idx]
         if in_range(nx, ny) and graph[nx][ny]!=1:
             graph[nx][ny]=2
 def bomb2(graph, x, y):
     dx, dy = [-1,1,0,0],[0,0,-1,1]
-    for idx in range(n):
+    for idx in range(4):
         nx, ny = x+dx[idx], y+dy[idx]
         if in_range(nx, ny) and graph[nx][ny]!=1:
             graph[nx][ny]=2
 
 def bomb3(graph, x, y):
-    dx, dy = [-1,-1,1,1],[-1,1,1,-1]
-    for idx in range(n):
+    dx, dy = [-1,-1,1,1],[-1,1,-1,1]
+    for idx in range(4):
         nx, ny = x+dx[idx], y+dy[idx]
         if in_range(nx, ny) and graph[nx][ny]!=1:
             graph[nx][ny]=2
