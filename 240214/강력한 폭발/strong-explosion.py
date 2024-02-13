@@ -35,19 +35,21 @@ def copy(graph):
             new_graph[i][j]=graph[i][j]
     return new_graph
 
+# 첫번째 폭발
 def bomb1(graph, x, y):
     dx, dy = [-2,-1,1,2],[0,0,0,0]
     for idx in range(4):
         nx, ny = x+dx[idx], y+dy[idx]
         if in_range(nx, ny) and graph[nx][ny]!=1:
             graph[nx][ny]=1
+# # 두번째 폭발
 def bomb2(graph, x, y):
     dx, dy = [-1,1,0,0],[0,0,-1,1]
     for idx in range(4):
         nx, ny = x+dx[idx], y+dy[idx]
         if in_range(nx, ny) and graph[nx][ny]!=1:
             graph[nx][ny]=1
-
+# 세번째 폭발
 def bomb3(graph, x, y):
     dx, dy = [-1,-1,1,1],[-1,1,-1,1]
     for idx in range(4):
@@ -63,10 +65,10 @@ def bomb(graph, num):
         return
     x, y = bomb_pos[num]
     # 폭탄 터지는 방법 1
-    # 새로운 배열을 만들어서 전달
-    new_graph = copy(graph)
+    new_graph = copy(graph) # 새로운 배열을 만들어서 전달
     bomb1(new_graph,x,y)
     bomb(new_graph,num+1)
+
     # 폭탄 터지는 방법 2
     new_graph = copy(graph)
     bomb2(new_graph,x,y)
