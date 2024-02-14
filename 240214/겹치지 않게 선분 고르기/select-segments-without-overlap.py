@@ -27,15 +27,13 @@ def choose(k: int, count: int):
         choose(k+1, count)
     else: # 겹치지 않을 경우
         # 선분 추가
-        tmp = points[:]
+        tmp = points[:] # 원래 함수 복사
         add_line(x1,x2)
         choose(k+1, count+1)
+        points = tmp[:] # 다시 되돌리기
 
-        points = tmp[:]
-        # 그대로 진행
+        # 선분 추가 안하고 진행
         choose(k+1, count)
-
-
 
 choose(0,0)
 print(ans)
