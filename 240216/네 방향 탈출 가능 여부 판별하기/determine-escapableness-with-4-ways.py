@@ -21,7 +21,11 @@ def bfs(start):
             return True
         for dx,dy in zip(dxs, dys):
             nx,ny =x+dx, y+dy
-            if not in_range(nx,ny) or visited[nx][ny] or graph[nx][ny]==0:
+            if not in_range(nx,ny):
+                continue
+            if visited[nx][ny]:
+                continue
+            if graph[nx][ny]==0:
                 continue
 
             visited[nx][ny]=True
