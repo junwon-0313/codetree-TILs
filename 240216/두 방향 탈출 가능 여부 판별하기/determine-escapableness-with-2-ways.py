@@ -21,6 +21,8 @@ def dfs(x,y):
         nx, ny = x+dx, y+dy
         if not in_range(nx,ny): # 범위 체크
             continue
+        if visited[nx][ny]:
+            continue
         if graph[nx][ny]==0: # 뱀 만남
             continue
         visited[nx][ny]=True
