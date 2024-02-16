@@ -23,7 +23,7 @@ def dfs(v):
             dfs(adj_v)
 global ans
 ans =0 
-for idx in range(1,1001):
+for idx in range(2,1001):
     total =0
     visited = [False for _  in range(1001)]
     visited[idx]=True
