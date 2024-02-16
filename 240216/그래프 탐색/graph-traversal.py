@@ -21,13 +21,9 @@ def dfs(v):
             total+=1
             visited[adj_v]=True
             dfs(adj_v)
-global ans
-ans =0 
-for idx in range(2,1001):
-    total =0
-    visited = [False for _  in range(1001)]
-    visited[idx]=True
-    dfs(idx)
-    if total>ans:
-        ans = total
-print(ans)
+total = 0
+visited = [False for _  in range(1001)]
+visited[1]=True
+dfs(1)
+
+print(total)
