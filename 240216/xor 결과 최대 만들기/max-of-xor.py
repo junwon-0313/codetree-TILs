@@ -17,37 +17,39 @@ def bin2dec(x: str):
         dec+=int(num)*2**idx
     return dec
 
-def xor():
-    bin_lst = []
-    for num in choose: # 2진수로 변환해서 넣는다. 
-        bin_lst.append(dec2bin(num))
+def xor(x1,x2): # 두 10진수를 넣고 xor한 10진수를 반환
+    x1 =dec2bin(x1)
+    x2 = dec2bin(x2)
     # 자릿수 맞춰주기
-    max_pos = max([len(idx) for idx in bin_lst])
-    for idx in range(m):
-        if len(bin_lst[idx])<max_pos:
-            bin_lst[idx] = '0'*(max_pos-len(bin_lst[idx]))+bin_lst[idx]
+    max_pos = max(len(x1), len(x2))
+
+    if len(x1)<max_pos:
+        x1 = '0'*(max_pos-len(x1))+x1
+    if len(x2)<max_pos:
+        x2 = '0'*(max_pos-len(x2))+x2
     max_bin = ''
-    for pos in range(max_pos):
-        for idx in range(m-1): # 하나라도 다르면 추가
-            if bin_lst[idx][pos] != bin_lst[idx+1][pos]:
-                max_bin+='1'
-                break
-        else: # 모두 같으면 0
+    for pos in range(max_pos):# -> 2개씩 xor
+        if x1[pos] != x2[pos]:
+            max_bin+='1'
+        else: 
             max_bin+='0'
-            
-    max_dec = bin2dec(max_bin[::-1])
+    max_dec = bin2dec(max_bin)
     return max_dec
 
 ans =0
 choose = []
 def comb(k, cnt):
     global ans
+    global choose
     if cnt== m: # 출력
         # print('xor')
         if m==1:
             max_dec = choose[0]
         else:
-            max_dec = xor()
+            for idx in range(m-1):
+                tmp = xor(choose[idx], choose[idx+1])
+                choose[idx+1] = tmp
+            max_dec=choose[-1]
         if max_dec >ans:
             ans = max_dec
     if k==n: # 종료 조건
