@@ -29,9 +29,9 @@ def bfs(x,y,rock):
                 cnt+=1
                 q.append((nx,ny,rock))
             if graph[nx][ny]==1 and rock>=1: # 1이지만 돌로 깸
-                visited[nx][ny]=True
+
                 q.append((nx,ny,rock-1))
-                visited[nx][ny]=False
+
 
 
 visited = [[False]*n for _ in range(n)]
