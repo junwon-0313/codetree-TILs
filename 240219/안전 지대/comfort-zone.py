@@ -6,13 +6,6 @@ n,m = map(int, input().split())
 town = [list(map(int,input().split())) for _ in range(n)]
 dxs , dys = (0,0,1,-1), (1,-1,0,0)
 
-def find_k():
-    num_lst = set()
-    for x in range(n):
-        for y in range(m):
-            num_lst.add(town[x][y])
-    return list(num_lst)
-
 def in_range(x,y):
     return 0<=x<n and 0<=y<m
 
@@ -27,14 +20,9 @@ def dfs(x,y,k): # 상하좌우
             visited[nx][ny]=True
             dfs(nx,ny,k)
 
-# 가능한 k값을 모두 찾기
-num_lst = find_k()
-num_lst.sort()
-# print(num_lst)
-
 total = []
 
-for k in num_lst:
+for k in range(1,101):
     visited = [[False]*m for _ in range(n)]
     town_num =0
     for x in range(n):
