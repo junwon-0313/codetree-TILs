@@ -1,6 +1,6 @@
 # 최대 재귀 깊이를 설정
 import sys
-sys.setrecursionlimit(10**6)
+sys.setrecursionlimit(10**5)
 
 n,m = map(int, input().split())
 town = [list(map(int,input().split())) for _ in range(n)] # 집의 높이 graph
