@@ -2,7 +2,7 @@
 import sys
 # 맵의 최대 크기가 2500이므로 2500번 반복 가능!
 # 10**6은 메모리 에러, 그 이상은 OverflowError 
-sys.setrecursionlimit(10**4) 
+sys.setrecursionlimit(3000) 
 
 
 n,m = map(int, input().split())
