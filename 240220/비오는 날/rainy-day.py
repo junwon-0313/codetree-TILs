@@ -1,7 +1,13 @@
 n = int(input())
-weather=[list(input().split()) for _ in range(n)]
+weather = []
+for _ in range(n):
+    date, day, w = list(input().split())
+    year,month, date = date.split('-')
+    weather.append([year, month, date, day, w])
+weather.sort(key=lambda x:(x[0],x[1],x[2]))
 
-for date, day, w in weather:
+for year, month, date, day, w in weather:
     if w=='Rain':
-        print(date,day,w)
+        t = year+'-'+month+'-'+date
+        print(t,day,w)
         break
