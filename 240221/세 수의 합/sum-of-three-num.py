@@ -14,6 +14,8 @@ if k%3==0 and d[k//3]>=3:
     ans += (d[k//3]*(d[k//3]-1)* (d[k//3]-2))//6
 # 두 수가 같을 때
 for num in list(d.keys()):
+    if k-2*num ==num:
+        continue
     if k-2*num in d:
         ans += (d[num]*(d[num]-1))//2 * d[k-2*num]
 # 모두 다를 때
