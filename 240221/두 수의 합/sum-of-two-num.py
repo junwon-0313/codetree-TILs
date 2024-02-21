@@ -10,5 +10,9 @@ for num in lst:
 ans =0
 for num in list(d.keys()):
     if k-num in d:
-        ans += d[num]*d[k-num]
+        if k==2*num:
+            ans += d[num]* (d[num]-1)//2
+        else:
+            ans += d[num]*d[k-num]
+
 print(ans//2)
