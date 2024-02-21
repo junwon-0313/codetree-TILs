@@ -12,6 +12,6 @@ for num in num_lst:
 
 for num in cnt_lst:
     if num not in d:
-        print(0, end = '')
+        print(0, end = ' ')
     else:
         print(d[num], end = ' ')
