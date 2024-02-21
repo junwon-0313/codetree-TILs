@@ -24,6 +24,6 @@ for num1 in d_k:
                     elif num3==num1 and d[num1]>=2:
                         ans +=d[num3]*(d[num3]-1)*d[num2]//2
                 elif len(set(tmp))==3: #모두 다를 때
-                    ans += d[num1]*d[num2]*d[num3]
+                    ans += d[num1]*d[num2]*d[num3]//3
 
 print(ans)
