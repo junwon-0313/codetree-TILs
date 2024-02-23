@@ -1,2 +1,6 @@
 c = input()
-print(chr(ord(c)-1))
+
+if ord(c)==97:
+    print('z')
+else:
+    print(chr(ord(c)-1))
