@@ -7,4 +7,7 @@ for c in cmd:
     else:
         idx-=1
 
-print(A[idx:]+A[:idx])
+if idx>=0:
+    print(A[idx:]+A[:idx])
+else:
+    print(A[idx:]+A[:idx+len(A)])
