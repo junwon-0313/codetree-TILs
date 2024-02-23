@@ -6,8 +6,6 @@ for c in cmd:
         idx+=1
     else:
         idx-=1
+    idx=idx%len(A)
 
-if idx>=0:
-    print(A[idx:]+A[:idx])
-else:
-    print(A[idx:]+A[:idx+len(A)])
+print(A[idx:]+A[:idx])
