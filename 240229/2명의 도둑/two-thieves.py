@@ -1,4 +1,4 @@
-# 2명의 도둑이 동시에 선택
+# Brute Force Search + BT
 # O(N^2*N^2)
 global m, c
 n,m,c = map(int,input().split())
@@ -19,7 +19,7 @@ def choose(lst, gold_lst, k): # k번째 자리의 수를 선택
         # 범위를 넘어서지 않을 때 추가
         gold_lst.append(lst[k])
         choose(lst, gold_lst,k+1)
-        gold_lst.pop()
+        # gold_lst.pop()
     return max_gold
 
 total_gold=0
