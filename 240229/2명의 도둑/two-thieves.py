@@ -19,7 +19,7 @@ def choose(lst, gold_lst, k): # k번째 자리의 수를 선택
         # 범위를 넘어서지 않을 때 추가
         gold_lst.append(lst[k])
         choose(lst, gold_lst,k+1)
-        # gold_lst.pop()
+        gold_lst.pop()
     return max_gold
 max_gold = 0    
 for x1 in range(n):
