@@ -21,17 +21,22 @@ def choose(lst, gold_lst, k): # k번째 자리의 수를 선택
         choose(lst, gold_lst,k+1)
         gold_lst.pop()
     return max_gold
-max_gold = 0    
+
+total_gold=0
 for x1 in range(n):
     for y1 in range(n):
         for idx in range(m):
             pos =[] # 두 도둑이 겹치지 않게 관리
             pos.append((x1,y1+idx))
+        max_gold = 0 # M개 중에서 선택해서 가장 큰 경우
         gold1 = choose(graph[x1][y1:y1+m], [], 0)
-        max_gold = 0
         for x2 in range(n):
             for y2 in range(n):
                 if (x2,y2) in pos:
                     continue
+                max_gold = 0
                 gold2 = choose(graph[x2][y2:y2+m], [], 0)
-print(gold1+gold2)
+                if gold1+gold2>total_gold:
+                    total_gold=gold1+gold2
+
+print(total_gold)
