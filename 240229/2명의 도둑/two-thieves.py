@@ -19,19 +19,19 @@ def choose(lst, gold_lst, k): # k번째 자리의 수를 선택
         # 범위를 넘어서지 않을 때 추가
         gold_lst.append(lst[k])
         choose(lst, gold_lst,k+1)
-        # gold_lst.pop()
+        gold_lst.pop()
     return max_gold
 
 total_gold=0
 for x1 in range(n):
-    for y1 in range(n):
+    for y1 in range(n-m):
         pos =[] # 두 도둑이 겹치지 않게 관리
         for idx in range(m):
             pos.append((x1,y1+idx))
         max_gold = 0 # M개 중에서 선택해서 가장 큰 경우
         gold1 = choose(graph[x1][y1:y1+m], [], 0)
         for x2 in range(n):
-            for y2 in range(n):
+            for y2 in range(n-m):
                 flag = False
                 for idx in range(m):
                     if (x2, y2+idx) in pos:
