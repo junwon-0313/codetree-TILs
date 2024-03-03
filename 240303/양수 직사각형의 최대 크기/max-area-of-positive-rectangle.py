@@ -19,7 +19,7 @@ def rectangle(x,y):
     
     flag_x, flag_y = False, False # 아래 반복문이 개별적으로 끝까지 동작하게 추가
     for nx in range(x,end_x): # 행을 고정
-        for ny in range(y,m):
+        for ny in range(y,end_y):
             if graph[nx][ny]<=0:
                 flag_x=True # 종료
             if not flag_x:
@@ -29,7 +29,7 @@ def rectangle(x,y):
                     ans = rect_size
     
     for ny in range(y,end_y): # 열을 고정
-        for nx in range(x,n): 
+        for nx in range(x,end_x): 
             if graph[nx][ny]<=0:
                 flag_y =True # 종료
             if not flag_y:
