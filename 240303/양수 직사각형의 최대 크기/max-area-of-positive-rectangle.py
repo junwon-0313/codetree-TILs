@@ -16,13 +16,13 @@ def rectangle(x,y):
         if graph[x][ny]<=0:
             end_y=ny
             break
-
+    
     flag_x, flag_y = False, False # 아래 반복문이 개별적으로 끝까지 동작하게 추가
     for nx in range(x,end_x): # 행을 고정
         for ny in range(y,m):
             if graph[nx][ny]<=0:
                 flag_x=True # 종료
-            if not flag_x: # 종료하지 않았으면 모두 업데이트 
+            if not flag_x:
                 rect_size = (nx-x+1)*(ny-y+1)
                 # print('행 고정',rect_size, nx,x,ny,y)
                 if rect_size>ans:
@@ -41,6 +41,7 @@ def rectangle(x,y):
 # 시작점: 양수
 for x in range(n):
     for y in range(m):
+        # 방문처리는 따로 필요없음: 방향이 정해짐
         if graph[x][y]>0:
             rectangle(x,y)
 
