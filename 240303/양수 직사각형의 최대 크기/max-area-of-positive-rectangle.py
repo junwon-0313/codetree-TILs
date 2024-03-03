@@ -10,11 +10,11 @@ def rectangle(x,y):
     end_x, end_y = n,m # 몇번째 행 열까지 진행해도 되는지 체크
     for nx in range(x, n):
         if graph[nx][y]<=0:
-            end_x=nx
+            end_x=nx+1
             break
     for ny in range(y,m):
         if graph[x][ny]<=0:
-            end_y=ny
+            end_y=ny+1
             break
     
     flag_x, flag_y = False, False # 아래 반복문이 개별적으로 끝까지 동작하게 추가
@@ -22,7 +22,7 @@ def rectangle(x,y):
         for ny in range(y,end_y):
             if graph[nx][ny]<=0:
                 flag_x=True # 종료
-            if not flag_x:
+            if not flag_x: # 종료하지 않았으면 모두 업데이트 
                 rect_size = (nx-x+1)*(ny-y+1)
                 # print('행 고정',rect_size, nx,x,ny,y)
                 if rect_size>ans:
@@ -41,7 +41,6 @@ def rectangle(x,y):
 # 시작점: 양수
 for x in range(n):
     for y in range(m):
-        # 방문처리는 따로 필요없음: 방향이 정해짐
         if graph[x][y]>0:
             rectangle(x,y)
 
