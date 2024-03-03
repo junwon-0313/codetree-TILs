@@ -10,16 +10,16 @@ def rectangle(x,y):
     end_x, end_y = n,m # 몇번째 행 열까지 진행해도 되는지 체크
     for nx in range(x, n):
         if graph[nx][y]<=0:
-            end_x=nx+1
+            end_x=nx
             break
     for ny in range(y,m):
         if graph[x][ny]<=0:
-            end_y=ny+1
+            end_y=ny
             break
-    
+
     flag_x, flag_y = False, False # 아래 반복문이 개별적으로 끝까지 동작하게 추가
     for nx in range(x,end_x): # 행을 고정
-        for ny in range(y,end_y):
+        for ny in range(y,m):
             if graph[nx][ny]<=0:
                 flag_x=True # 종료
             if not flag_x: # 종료하지 않았으면 모두 업데이트 
@@ -29,7 +29,7 @@ def rectangle(x,y):
                     ans = rect_size
     
     for ny in range(y,end_y): # 열을 고정
-        for nx in range(x,end_x): 
+        for nx in range(x,n): 
             if graph[nx][ny]<=0:
                 flag_y =True # 종료
             if not flag_y:
