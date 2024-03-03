@@ -9,23 +9,35 @@ ans = -1
 #     return 0<=x<n and 0<=y<m
 def rectangle(x,y):
     global ans
-    for nx in range(x,n): # 행을 고정
-        for ny in range(y,m):
+    # 몇번째 행 열까지 진행해도 되는지 체크
+    end_x, end_y = n,m
+    for nx in range(x, n):
+        if graph[nx][y]<0:
+            end_x=nx
+            break
+    for ny in range(y,m):
+        if graph[x][ny]<0:
+            end_y=ny
+            break
+
+    for nx in range(x,end_x): # 행을 고정
+        for ny in range(y,end_y):
             if graph[nx][ny]<0:
                 return # 종료
         rect_size = (nx-x+1)*(ny-y+1)
+        # print('행 고정',rect_size, nx,x,ny,y)
         if rect_size>ans:
             ans = rect_size
     
-    for ny in range(y,m): # 열을 고정
-        for nx in range(x,n): 
+    for ny in range(y,end_y): # 열을 고정
+        for nx in range(x,end_x): 
             if graph[nx][ny]<0:
                 return # 종료
         rect_size = (nx-x+1)*(ny-y+1)
+        # print('열 고정',rect_size)
         if rect_size>ans:
             ans = rect_size
 
-dxs, dys =[1,0],[0,1]
 # 시작점: 양수
 for x in range(n):
     for y in range(m):
