@@ -19,12 +19,12 @@ def rectangle(x,y):
         if graph[x][ny]<=0:
             end_y=ny
             break
-
+    flag_x, flag_y = False, False
     for nx in range(x,end_x): # 행을 고정
         for ny in range(y,end_y):
             if graph[nx][ny]<=0:
-                break # 종료
-        else:
+                flag_x=True # 종료
+        if not flag_x:
             rect_size = (nx-x+1)*(ny-y+1)
             # print('행 고정',rect_size, nx,x,ny,y)
             if rect_size>ans:
@@ -33,8 +33,8 @@ def rectangle(x,y):
     for ny in range(y,end_y): # 열을 고정
         for nx in range(x,end_x): 
             if graph[nx][ny]<=0:
-                break # 종료
-        else:
+                flag_y =True # 종료
+        if not flag_y:
             rect_size = (nx-x+1)*(ny-y+1)
             # print('열 고정',rect_size)
             if rect_size>ans:
