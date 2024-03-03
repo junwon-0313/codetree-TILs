@@ -12,17 +12,17 @@ def rectangle(x,y):
     # 몇번째 행 열까지 진행해도 되는지 체크
     end_x, end_y = n,m
     for nx in range(x, n):
-        if graph[nx][y]<0:
+        if graph[nx][y]<=0:
             end_x=nx
             break
     for ny in range(y,m):
-        if graph[x][ny]<0:
+        if graph[x][ny]<=0:
             end_y=ny
             break
 
     for nx in range(x,end_x): # 행을 고정
         for ny in range(y,end_y):
-            if graph[nx][ny]<0:
+            if graph[nx][ny]<=0:
                 return # 종료
         rect_size = (nx-x+1)*(ny-y+1)
         # print('행 고정',rect_size, nx,x,ny,y)
@@ -31,7 +31,7 @@ def rectangle(x,y):
     
     for ny in range(y,end_y): # 열을 고정
         for nx in range(x,end_x): 
-            if graph[nx][ny]<0:
+            if graph[nx][ny]<=0:
                 return # 종료
         rect_size = (nx-x+1)*(ny-y+1)
         # print('열 고정',rect_size)
