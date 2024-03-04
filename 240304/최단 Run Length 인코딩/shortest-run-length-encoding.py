@@ -15,7 +15,7 @@ for shift in range(1, len(A)):
         else:
             cnt+=1
     total+= x
-    # total+=str(cnt)
+    total+=str(cnt)
     # print(total)
     if len(total)<ans:
         ans=len(total)
