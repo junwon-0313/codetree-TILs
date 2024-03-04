@@ -4,9 +4,9 @@
 n, m = map(int,input().split())
 graph = [list(map(int,input().split())) for _ in range(n)]
 ans = -1
-def rectangle(x,y): #x,y에서 n,m까지 진행
+def rectangle(x,y): #(x,y)에서 (n,m)까지 탐색
     global ans
-    lst = []
+    lst = [] # (x,y)를 시작하여 각 행에서 만들 수 있는 직사각형의 크기를 저장
     for nx in range(x,n):
         cnt = 0
         for ny in range(y, m):
@@ -14,17 +14,13 @@ def rectangle(x,y): #x,y에서 n,m까지 진행
                 cnt+=1
             else:
                 break
-        lst.append(cnt)
-    
-    min_rect = 100
+        lst.append(cnt) 
+    min_rect = 100 # 최댓값으로 초기화
     for idx, s in enumerate(lst):
-        min_rect= min(min_rect,s)
-        rect_size = min_rect*(idx+1)
-        if ans<rect_size:
+        min_rect= min(min_rect,s) # 한 점을 시작으로 직사각형이 되려면 해당 조건을 따라야 함.
+        rect_size = min_rect*(idx+1) # 세로 x 가로
+        if ans<rect_size: # 최댓값 업데이트
             ans = rect_size
-
-
-
 
 # 시작점: 양수
 for x in range(n):
