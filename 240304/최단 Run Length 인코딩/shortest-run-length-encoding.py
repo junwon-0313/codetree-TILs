@@ -6,7 +6,7 @@ for shift in range(1, len(A)):
     total =''
     cnt =1
     x = tmp_A[0]
-    for nx in range(1, len(A)):
+    for nx in range(len(A)):
         if x!=tmp_A[nx]:
             total+=x
             total+=str(cnt)
@@ -15,7 +15,7 @@ for shift in range(1, len(A)):
         else:
             cnt+=1
     total+= x
-    total+=str(cnt)
+    # total+=str(cnt)
     # print(total)
     if len(total)<ans:
         ans=len(total)
