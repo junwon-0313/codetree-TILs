@@ -5,5 +5,6 @@ while True:
         break
     lst.append(s)
 print(len(lst))
-print(lst[0])
-print(lst[-1])
+for idx in range(len(lst)):
+    if (idx+1)%2==1:
+        print(lst[idx])
