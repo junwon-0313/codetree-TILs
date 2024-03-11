@@ -16,3 +16,5 @@ for letter in lst:
     if letter in ans_lst:
         print(letter)
         break
+else:
+    print(None)
