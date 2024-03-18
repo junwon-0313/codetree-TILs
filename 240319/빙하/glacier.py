@@ -1,0 +1,66 @@
+# 0 은 물, 1은 빙하
+# 상하 좌우에 빙하가 둘러 쌓인 경우 녹지 않음.
+# 모두 녹는데 걸리는 시간
+n, m = map(int, input().split())
+graph = []
+for _ in range(n):
+    graph.append(list(map(int, input().split())))
+
+def in_range(x,y):
+    return 0<=x<n and 0<=y<m
+
+def remain_ice():
+    cnt=0
+    for x in range(n):
+        for y in range(m):
+            if graph[x][y]==1:
+                cnt+=1
+    return cnt
+
+
+# 200*200*4*200
+dxs, dys = [1,-1,0,0],[0,0,1,-1]
+# 0,0을 시작으로 물이 이어진 부분을 찾음
+# 1초 후, 바깥 빙하를 녹임: 방문처리 된 영역 근처라면
+def bfs(x,y, visited):
+    q=[]
+    q.append((x,y))
+    while q:
+        x,y = q.pop(0)
+        visited[x][y]=True
+        for dx, dy in zip(dxs,dys):
+            nx,ny = x+dx, y+dy
+            if not in_range(nx,ny):
+                continue
+            if visited[nx][ny]:
+                continue
+            if graph[nx][ny]==0:
+                q.append((nx,ny))
+    return visited
+
+def melt():
+    for x in range(n):
+        for y in range(n):
+            if graph[x][y]==1:
+                for dx, dy in zip(dxs,dys):
+                    nx,ny = x+dx, y+dy
+                    # 범위 예외처리 안해줘도 됨.
+                    if visited[nx][ny]:
+                        graph[x][y]=0
+                    
+
+
+
+cnt_lst=[]
+time=0
+while True:
+    cnt = remain_ice()
+    if cnt ==0:
+        break
+    cnt_lst.append(cnt)
+    time+=1
+    visited = [[False]*m for _ in range(n)]   
+    visited = bfs(0,0,visited)
+    melt()
+
+print(time, cnt_lst[-1])
