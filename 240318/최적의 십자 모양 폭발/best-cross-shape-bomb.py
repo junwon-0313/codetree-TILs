@@ -33,8 +33,9 @@ def bomb_gravity(x,y,graph):
     for nx in range(n):
         if graph[nx][y]==-1:
             break
-        graph[nx+y_cnt-1][y] = graph[nx][y]
-        graph[nx][y]=-1
+        if in_range(nx+y_cnt,y):
+            graph[nx+y_cnt][y] = graph[nx][y]
+            graph[nx][y]=-1
     return graph
 
 
