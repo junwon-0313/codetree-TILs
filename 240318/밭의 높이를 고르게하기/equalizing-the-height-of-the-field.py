@@ -9,7 +9,7 @@ for i in range(n):
     else:
         cost.append(abs(field[i]-h))
 min_cost = 200*100
-for i in range(n-t):
+for i in range(n-t+1):
     tmp_cost = 0
     for j in range(i,i+t):
         tmp_cost+=cost[j]
