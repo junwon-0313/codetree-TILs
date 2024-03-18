@@ -20,26 +20,15 @@ def bomb(x,y,graph):
 
 # 중력 
 def gravity(graph, num):
-    for ny in range(y-num,y+num+1):
-        if in_range(x,ny):
-            # y에서 하나는 반드시 터짐 -> 여기를 보완
-            num_lst= []
-            y_cnt = 0
-            for nx in range(n):
-                if graph[nx][ny]==-1:
-                    y_cnt+=1
-            for nx in range(n):
-                if graph[nx][ny]==-1:
-                    break
-                num_lst.append(graph[nx][ny])
-            for nx in range(n):
-                if nx+1 <=y_cnt:
-                    graph[nx][ny]=-1
-                else:
-                    break
-            for idx in range(len(num_lst)):
-                graph[y_cnt+idx][ny]=num_lst[idx]
-    return graph
+    new_graph = [[-1]*n for _ in range(n)]
+    # 아래서 부터 올라옴
+    for y in range(n):
+        next_row = n-1
+        for x in range(n):
+            if graph[x][y]!=-1:
+                new_graph[next_row][y] = graph[x][y]
+                next_row -=1
+    return new_graph
 
 # 출력 함수
 def print_graph(graph):
@@ -70,6 +59,5 @@ for x in range(n):
         tmp_graph = gravity(tmp_graph, num)
         # print_graph(tmp_graph) # 출력
         tmp_cnt = find_couple(tmp_graph)
-        if tmp_cnt>max_ans:
-            max_ans=tmp_cnt
+        max_ans = max(max_ans,tmp_cnt)
 print(max_ans)
