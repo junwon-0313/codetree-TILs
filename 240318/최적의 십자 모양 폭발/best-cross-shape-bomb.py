@@ -29,13 +29,20 @@ def bomb_gravity(x,y,graph):
             for nx in range(1,x):
                 graph[nx][ny] = graph[nx-1][ny]
             graph[0][ny]=-1
-    # y에서 하나는 반드시 터짐 -> 여기를 보완 
+    # y에서 하나는 반드시 터짐 -> 여기를 보완
+    num_lst= [] 
     for nx in range(n):
         if graph[nx][y]==-1:
             break
-        if in_range(nx+y_cnt,y):
-            graph[nx+y_cnt][y] = graph[nx][y]
+        num_lst.append(graph[nx][y])
+    for nx in range(n):
+        if nx+1 <=y_cnt:
             graph[nx][y]=-1
+        else:
+            break
+    for idx in range(len(num_lst)):
+        graph[y_cnt+idx][y]=num_lst[idx]
+        
     return graph
 
 
@@ -69,10 +76,8 @@ max_ans =-1
 for x in range(n):
     for y in range(n):
         tmp_graph = copy_graph(graph)
-        # print('INIT')
-        # print_graph(tmp_graph)
         bomb_gravity(x,y,tmp_graph)
-        # print('AFTER BoMB')
+        # print('AFTER BoMB', x,y)
         # print_graph(tmp_graph)
         tmp_cnt = find_couple(tmp_graph)
         if tmp_cnt>max_ans:
