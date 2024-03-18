@@ -20,12 +20,11 @@ def bomb(x,y,graph):
 
 # 중력 
 def gravity(graph, num):
-    new_graph = [[-1]*n for _ in range(n)]
-    # 아래서 부터 올라옴
-    for y in range(n):
-        next_row = n-1
-        for x in range(n-1,-1,-1):
-            if graph[x][y]!=-1:
+    new_graph = [[-1]*n for _ in range(n)] # 중력 동작
+    for y in range(n): # 열 별로 동작
+        next_row = n-1 # 맨 아래 행 인덱스로 초기화
+        for x in range(n-1,-1,-1): # 맨 아래 행부터 한 행씩 올라옴
+            if graph[x][y]!=-1: # 값이 -1일 경우 pass
                 new_graph[next_row][y] = graph[x][y]
                 next_row -=1
     return new_graph
