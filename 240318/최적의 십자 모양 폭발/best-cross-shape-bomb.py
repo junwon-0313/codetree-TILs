@@ -3,9 +3,11 @@ graph = []
 for _ in range(n):
     graph.append(list(map(int,input().split())))
 
+# 범위 체크
 def in_range(x,y):
     return 0<=x<n and 0<=y<n
 
+# 폭탄
 def bomb(x,y,graph):
     num= graph[x][y]-1
     for nx in range(x-num,x+num+1): # 열
@@ -16,6 +18,7 @@ def bomb(x,y,graph):
             graph[x][ny]=-1
     return graph, num
 
+# 중력 
 def gravity(graph, num):
     for ny in range(y-num,y+num+1):
         if in_range(x,ny):
@@ -38,13 +41,14 @@ def gravity(graph, num):
                 graph[y_cnt+idx][ny]=num_lst[idx]
     return graph
 
+# 출력 함수
 def print_graph(graph):
     for x in range(n):
         for y in range(n):
             print(graph[x][y], end = ' ')
         print()
 
-# 방향 존재, 방문처리 
+# 오른쪽과 아래 방향만 탐색
 dxs,dys = [1,0], [0,1]
 def find_couple(graph):
     cnt = 0
@@ -58,22 +62,14 @@ def find_couple(graph):
                     cnt+=1
     return cnt
 
-def copy_graph(graph):
-    tmp_graph=[]
-    for i in range(n):
-        tmp_graph.append(graph[i][:])
-    return tmp_graph
-
 max_ans =-1
 for x in range(n):
     for y in range(n):
-        tmp_graph = copy_graph(graph)
+        tmp_graph = [i[:] for i in graph] # copy
         tmp_graph,num = bomb(x,y,tmp_graph)
-        # print('AFTER BoMB+ gravity', x,y)
         tmp_graph = gravity(tmp_graph, num)
-        # print_graph(tmp_graph)
+        # print_graph(tmp_graph) # 출력
         tmp_cnt = find_couple(tmp_graph)
-        # print(tmp_cnt)
         if tmp_cnt>max_ans:
             max_ans=tmp_cnt
 print(max_ans)
