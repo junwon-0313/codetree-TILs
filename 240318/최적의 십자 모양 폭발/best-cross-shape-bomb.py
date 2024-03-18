@@ -24,7 +24,7 @@ def gravity(graph, num):
     # 아래서 부터 올라옴
     for y in range(n):
         next_row = n-1
-        for x in range(n):
+        for x in range(n-1,-1,-1):
             if graph[x][y]!=-1:
                 new_graph[next_row][y] = graph[x][y]
                 next_row -=1
