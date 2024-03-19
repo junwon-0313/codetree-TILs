@@ -22,9 +22,11 @@ def remain_ice():
 dxs, dys = [1,-1,0,0],[0,0,1,-1]
 # 0,0을 시작으로 물이 이어진 부분을 찾음
 # 1초 후, 바깥 빙하를 녹임: 방문처리 된 영역 근처라면
-def bfs(x,y, visited):
+def bfs(x,y, graph):
+    tmp_graph = [i[:] for i in graph]
     q=[]
     q.append((x,y))
+    visited = [[False]*m for _ in range(n)]
     while q:
         x,y = q.pop(0)
         visited[x][y]=True
@@ -36,31 +38,28 @@ def bfs(x,y, visited):
                 continue
             if graph[nx][ny]==0:
                 q.append((nx,ny))
-    return visited
+            if graph[nx][ny]==1:
+                tmp_graph[nx][ny]=0
+    return tmp_graph
 
-def melt():
+def print_graph(graph):
+    print('GRAPH')
     for x in range(n):
-        for y in range(n):
-            if graph[x][y]==1:
-                for dx, dy in zip(dxs,dys):
-                    nx,ny = x+dx, y+dy
-                    # 범위 예외처리 안해줘도 됨.
-                    if visited[nx][ny]:
-                        graph[x][y]=0
-                    
-
-
+        for y in range(m):
+            print(graph[x][y], end = ' ')
+        print()
 
 cnt_lst=[]
 time=0
+visited = [[False]*m for _ in range(n)] 
 while True:
+    # print_graph(graph)
     cnt = remain_ice()
     if cnt ==0:
         break
     cnt_lst.append(cnt)
     time+=1
-    visited = [[False]*m for _ in range(n)]   
-    visited = bfs(0,0,visited)
-    melt()
+    graph = bfs(0,0, graph)
+    
 
 print(time, cnt_lst[-1])
