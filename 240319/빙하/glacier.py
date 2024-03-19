@@ -85,7 +85,7 @@ def glacier_exist():
         for j in range(m):
             if a[i][j]== Element.GLACIER.value:
                 return True
-        return False
+    return False
 
 while True:
     simulate()
