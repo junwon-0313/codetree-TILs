@@ -10,6 +10,7 @@ def in_range(x,y):
 def bfs(x,y, num):
     q = []
     q.append((x,y,num))
+    visited = [[False]*m for _ in range(n)]
     visited[x][y]=True # 방문처리
     while q:
         x, y,num = q.pop(0)
@@ -24,6 +25,7 @@ def bfs(x,y, num):
                 q.append((nx,ny,num))
             if graph[nx][ny]==1:
                 graph[nx][ny]=-num
+
 def print_graph(graph):
     for x in range(n):
         for y in range(m):
@@ -38,17 +40,13 @@ def cnt_ice(num):
                 cnt+=1
     return cnt
 
-
-visited = [[False]*m for _ in range(n)]
-
 time=1
 for x in range(n):
     for y in range(m):
-        if visited[x][y]:
-            continue
         if graph[x][y]==-time+1:
             bfs(x,y,time)
             # print(time)
             # print_graph(graph)
             time+=1
+# print_graph(graph)
 print(time-2, cnt_ice(-time+2))
