@@ -1,52 +1,96 @@
-n, m = map(int, input().split())
-graph = []
-dxs, dys= [1,-1,0,0], [0,0,1,-1]
-for _ in range(n):
-    graph.append(list(map(int, input().split())))
+import enum
+
+class Element(enum.Enum):
+    WATER = 0
+    GLACIER = 1
+
+n, m =tuple(map(int,input().split()))
+
+a = [
+    list(map(int,input().split())) 
+    for _ in range(n)
+]
+
+q = []
+glaciers_to_melt = []
+visited=[
+    [False for _ in range(m)]
+    for _ in range(n)
+]
+
+cnt = 0
+
+dxs, dys = [0,1,0,-1],[1,0,-1,0]
+
+elapsed_time =0
+last_melt_tim=0
 
 def in_range(x,y):
     return 0<=x<n and 0<=y<m
 
-def bfs(x,y, num):
-    q = []
-    q.append((x,y,num))
-    visited = [[False]*m for _ in range(n)]
-    visited[x][y]=True # 방문처리
+def can_go(x,y):
+    return in_range(x,y) and a[x][y]== Element.WATER.value and not visited[x][y]
+
+def is_glacier(x,y):
+    return in_range(x,y) and a[x][y]== Element.GLACIER.value and not visited[x][y]
+
+def initialize():
+    for i in range(n):
+        for j in range(m):
+            visited[i][j] = False
+
+def bfs():
+    initialize()
+
+    q.append((0,0))
+    visited[0][0] = True
+
     while q:
-        x, y,num = q.pop(0)
+        x,y = q.pop(0)
+
         for dx, dy in zip(dxs, dys):
             nx,ny = x+dx, y+dy
-            if not in_range(nx,ny):
-                continue
-            if visited[nx][ny]: # 방문했으면 skip
-                continue
-            if graph[nx][ny]==0 or graph[nx][ny]==-num+1: # 물이면 
-                visited[nx][ny]=True # 방문처리
-                q.append((nx,ny,num))
-            if graph[nx][ny]==1:
-                graph[nx][ny]=-num
 
-def print_graph(graph):
-    for x in range(n):
-        for y in range(m):
-            print(graph[x][y], end =' ')
-        print()
+            if can_go(nx,ny):
+                q.append((nx,ny))
+                visited[nx][ny]=True
 
-def cnt_ice(num):
-    cnt =0
-    for x in range(n):
-        for y in range(m):
-            if graph[x][y]==num:
-                cnt+=1
-    return cnt
+def outside_water_exist_in_neighbor(x,y):
+    for dx,dy in zip(dxs, dys):
+        nx,ny =x+dx, y+dy
+        if in_range(nx,ny) and visited[nx][ny]:
+            return True
+    return False
 
-time=1
-for x in range(n):
-    for y in range(m):
-        if graph[x][y]==-time+1:
-            bfs(x,y,time)
-            # print(time)
-            # print_graph(graph)
-            time+=1
-# print_graph(graph)
-print(time-2, cnt_ice(-time+2))
+def melt():
+    global last_melt_cnt
+
+    for i in range(n):
+        for j in range(m):
+            if a[i][j]==Element.GLACIER.value and \
+                    outside_water_exist_in_neighbor(i,j):
+                a[i][j] = Element.WATER.value
+                last_melt_cnt +=1
+
+def simulate():
+    global elapsed_time, last_melt_cnt
+
+    elapsed_time+=1
+    last_melt_cnt=0
+    bfs()
+    melt()
+
+def glacier_exist():
+    for i in range(n):
+        for j in range(m):
+            if a[i][j]== Element.GLACIER.value:
+                return True
+        return False
+
+while True:
+    simulate()
+
+    if not glacier_exist():
+        break
+        
+print(elapsed_time, last_melt_cnt)
