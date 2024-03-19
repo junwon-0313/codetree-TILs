@@ -24,7 +24,7 @@ dxs, dys = [1,-1,0,0],[0,0,1,-1]
 def bfs():
     q=[(0,0)]
     visited = [[False]*m for _ in range(n)]
-    # visited[0][0]=True
+    visited[0][0]=True
     while q:
         x,y = q.pop(0)
         for dx, dy in zip(dxs,dys):
@@ -35,7 +35,7 @@ def bfs():
                 continue
             if graph[nx][ny]==0:
                 q.append((nx,ny))
-                visited[nx][ny]=True
+                visited[nx][ny]=True # 방문처리를 잘해줘야함!!!!
     return visited
 
 def melt():
