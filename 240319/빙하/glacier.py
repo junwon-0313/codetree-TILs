@@ -9,24 +9,27 @@ for _ in range(n):
 def in_range(x,y):
     return 0<=x<n and 0<=y<m
 
-def no_ice():
+def remain_ice():
+    cnt=0
     for x in range(n):
         for y in range(m):
             if graph[x][y]==1:
-                return False
-    return True
+                cnt+=1
+    return cnt
 
 
-# O(n*m max(n,m))
+# 200*200*4*200
 dxs, dys = [1,-1,0,0],[0,0,1,-1]
 # 0,0을 시작으로 물이 이어진 부분을 찾음
 # 1초 후, 바깥 빙하를 녹임: 방문처리 된 영역 근처라면
-def bfs():
-    q=[(0,0)]
+def bfs(x,y, graph):
+    tmp_graph = [i[:] for i in graph]
+    q=[]
+    q.append((x,y))
     visited = [[False]*m for _ in range(n)]
-    visited[0][0]=True
     while q:
         x,y = q.pop(0)
+        visited[x][y]=True
         for dx, dy in zip(dxs,dys):
             nx,ny = x+dx, y+dy
             if not in_range(nx,ny):
@@ -35,33 +38,29 @@ def bfs():
                 continue
             if graph[nx][ny]==0:
                 q.append((nx,ny))
-                visited[nx][ny]=True # 방문처리를 잘해줘야함!!!!
-    return visited
+                visited[nx][ny]=True
+            if graph[nx][ny]==1:
+                tmp_graph[nx][ny]=0
+    return tmp_graph
 
-def melt():
-    cnt=0
+def print_graph(graph):
+    print('GRAPH')
     for x in range(n):
         for y in range(m):
-            if graph[x][y]==1:
-                for dx, dy in zip(dxs,dys):
-                    nx,ny = x+dx, y+dy
-                    # 범위 예외처리 안해줘도 됨.
-                    if visited[nx][ny]:
-                        graph[x][y]=0
-                        cnt+=1
-                        break
-    return cnt
-                    
+            print(graph[x][y], end = ' ')
+        print()
 
+cnt_lst=[]
 time=0
-last_cnt =0
+visited = [[False]*m for _ in range(n)] 
 while True:
-    time+=1
-    visited = bfs()
-    last_cnt = melt()
-
-    if no_ice():
+    # print_graph(graph)
+    cnt = remain_ice()
+    if cnt ==0:
         break
- 
+    cnt_lst.append(cnt)
+    time+=1
+    graph = bfs(0,0, graph)
+    
 
-print(time, last_cnt)
+print(time, cnt_lst[-1])
