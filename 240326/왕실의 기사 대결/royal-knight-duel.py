@@ -31,8 +31,7 @@ def search_place(r,c,h,w,d):
             tmp_lst.append((r+i,c-1))
     return tmp_lst
 
-def knight_exist(x,y,num):
-    k_lst = []
+def knight_exist(x,y,num,meet_lst):
     for idx in range(n):
         if num==idx:
             continue
@@ -41,10 +40,10 @@ def knight_exist(x,y,num):
         r,c,h,w,k = knight[idx]
         for i in range(h):
             for j in range(w):
-                if (r+i,c+j) == (x,y):
-                    k_lst.append(idx)
+                if (r+i,c+j) == (x,y) and idx not in meet_lst:
+                    meet_lst.append(idx)
                     break
-    return k_lst
+    return meet_lst
 
 def bfs_move(i, d):
     q = [i]
@@ -57,15 +56,17 @@ def bfs_move(i, d):
         # d방향으로 한칸 갈 때, 확인해야되는 영역을 구한다. 
         search_lst = search_place(r,c,h,w,d)
 
+        meet_lst =[]
         for nx,ny in search_lst:
             # 벽을 만날 경우 바로 종료
             if not in_range(nx,ny):
                 return []
             if graph[nx][ny]==2:
                 return []
-            meet_lst = knight_exist(nx,ny,knight_num)
-            for idx in meet_lst:
-                q.append(idx)
+            meet_lst = knight_exist(nx,ny,knight_num, meet_lst)
+
+        for idx in meet_lst:
+            q.append(idx)
     return move_knight
 
 def damage(move_lst, d):
