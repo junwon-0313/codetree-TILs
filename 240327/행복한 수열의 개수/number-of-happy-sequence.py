@@ -6,7 +6,7 @@ for _ in range(n):
 ans =0
 # 행 마다
 for x in range(n):
-    max_cnt =0
+    max_cnt =1
     cnt = 1
     pre = graph[x][0]
     for y in range(1,n):
@@ -20,7 +20,7 @@ for x in range(n):
         ans+=1
 # 열마다
 for y in range(n):
-    max_cnt =0
+    max_cnt =1
     cnt = 1
     pre = graph[0][y]
     for x in range(1,n):
