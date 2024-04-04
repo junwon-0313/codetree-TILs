@@ -79,5 +79,5 @@ for r, d in wind:
     check_up(r, d)
     # 아래로
     check_down(r, d)
-    # print('after')
-    print_g()
+# print('after')
+print_g()
