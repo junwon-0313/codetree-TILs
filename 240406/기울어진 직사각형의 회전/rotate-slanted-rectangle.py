@@ -22,14 +22,14 @@ def rotate_g(r,c,m1,m2,m3,m4,d):
             graph[r+dxs[0]*idx][c+dys[0]*idx] = graph[r+dxs[0]*(idx-1)][c+dys[0]*(idx-1)]
         p2 = graph[point2[0]][point2[1]]
         for idx in range(m2,1,-1):
-            graph[point1[0]+dxs[1]*idx][point1[1]+dys[1]*idx] = graph[point1[0]+dxs[1]*(idx-1)][point1[1]+dxs[1]*(idx-1)]
+            graph[point1[0]+dxs[1]*idx][point1[1]+dys[1]*idx] = graph[point1[0]+dxs[1]*(idx-1)][point1[1]+dys[1]*(idx-1)]
         graph[point1[0]+dxs[1]][point1[1]+dys[1]] = p1
         p3 = graph[point3[0]][point3[1]]
         for idx in range(m3,1,-1):
-            graph[point2[0]+dxs[2]*idx][point2[1]+dys[2]*idx] = graph[point2[0]+dxs[2]*(idx-1)][point2[1]+dxs[2]*(idx-1)]
+            graph[point2[0]+dxs[2]*idx][point2[1]+dys[2]*idx] = graph[point2[0]+dxs[2]*(idx-1)][point2[1]+dys[2]*(idx-1)]
         graph[point2[0]+dxs[2]][point2[1]+dys[2]] = p2
         for idx in range(m4,1,-1):
-            graph[point3[0]+dxs[3]*idx][point3[1]+dys[3]*idx] = graph[point3[0]+dxs[3]*(idx-1)][point3[1]+dxs[3]*(idx-1)]
+            graph[point3[0]+dxs[3]*idx][point3[1]+dys[3]*idx] = graph[point3[0]+dxs[3]*(idx-1)][point3[1]+dys[3]*(idx-1)]
         graph[point3[0]+dxs[3]][point3[1]+dys[3]] = p3
     else: # 시계 방향
         p1 = graph[r][c]
