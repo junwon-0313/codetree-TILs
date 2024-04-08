@@ -77,8 +77,8 @@ for q in q_lst: # 10만
             if c2 ==num:
                 continue
             tmp2.append(num)
-        parent[c1], parent[c2] = parent[c2], parent[c1]
         tree[parent[c1]], tree[parent[c2]] = tmp1, tmp2
+        parent[c1], parent[c2] = parent[c2], parent[c1]
         # print('AFTER')
         # print(tree[parent[c1]],tree[parent[c2]])
 
