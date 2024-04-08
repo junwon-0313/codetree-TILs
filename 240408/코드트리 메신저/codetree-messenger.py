@@ -20,9 +20,9 @@ def find_chat(c):
     child_lst = [(c,0)]
     while child_lst:
         c,depth = child_lst.pop(0)
-        if c in tree:
-            for nc in tree[c]:
-                if alarm[nc]:
+        if c in tree: # 자식이 존재할 때 
+            for nc in tree[c]: # 자식
+                if alarm[nc]: # 알람이 끊기지 않았다면
                     child_lst.append((nc,depth+1))
                     if authority[nc] >=depth+1:
                         cnt+=1
@@ -59,10 +59,12 @@ for q in q_lst: # 10만
         c = q.other[0]
         power = q.other[1]
         authority[c]=power
+
     elif q.cmd ==400:
         c1,c2 = q.other
-        c1_lst = tree[parent[c1]]
-        c2_lst = tree[parent[c2]]
+        p1, p2 = parent[c1], parent[c2]
+        c1_lst = tree[p1]
+        c2_lst = tree[p2]
         tmp1 = [c2]
         tmp2 = [c1]
         # print('CHANGE')
@@ -77,11 +79,12 @@ for q in q_lst: # 10만
             if c2 ==num:
                 continue
             tmp2.append(num)
-        tree[parent[c1]], tree[parent[c2]] = tmp1, tmp2
-        parent[c1], parent[c2] = parent[c2], parent[c1]
+        # 여기서 중복이 발생할 수도 있음.
+        tree[p1], tree[p2] = list(set(tmp1)), list(set(tmp2))
         # print('AFTER')
         # print(tree[parent[c1]],tree[parent[c2]])
-
+        parent[c1], parent[c2] = p2, p1
+       
     elif q.cmd ==500:
         c = q.other[0]
         ans = find_chat(c)
