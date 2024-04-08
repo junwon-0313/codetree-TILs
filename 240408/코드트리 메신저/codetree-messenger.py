@@ -10,6 +10,7 @@ for _ in range(q):
     temp_lst = list(map(int,input().split()))
     q_lst.append(Query(temp_lst[0], temp_lst[1:]))
 
+tree = dict()
 parent = [-1 for _ in range(n+1)]
 authority = [-1 for _ in range(n+1)]
 alarm = [True for _ in range(n+1)] # 켜져있음 T
@@ -39,7 +40,6 @@ for q in q_lst: # 10만
             idx +=1
             authority[idx] = a
 
-        tree = dict()
         for idx, p in enumerate(parent): # 10만 
             if idx ==0:
                 continue
@@ -63,28 +63,31 @@ for q in q_lst: # 10만
     elif q.cmd ==400:
         c1,c2 = q.other
         p1, p2 = parent[c1], parent[c2]
-        c1_lst = tree[p1]
-        c2_lst = tree[p2]
-        tmp1 = [c2]
-        tmp2 = [c1]
-        # print('CHANGE')
-        # print(c1,c2)
-        # print('BEFORE')
-        # print(tree[parent[c1]],tree[parent[c2]])
-        for num in c1_lst:
-            if c1 ==num:
-                continue
-            tmp1.append(num)
-        for num in c2_lst:
-            if c2 ==num:
-                continue
-            tmp2.append(num)
-        # 여기서 중복이 발생할 수도 있음.
-        tree[p1], tree[p2] = list(set(tmp1)), list(set(tmp2))
-        # print('AFTER')
-        # print(tree[parent[c1]],tree[parent[c2]])
-        parent[c1], parent[c2] = p2, p1
-       
+        if p1==p2: # 부모가 같을 때, 고려
+            continue
+        else:
+            c1_lst = tree[p1]
+            c2_lst = tree[p2]
+            tmp1 = [c2]
+            tmp2 = [c1]
+            # print('CHANGE')
+            # print(c1,c2)
+            # print('BEFORE')
+            # print(tree[parent[c1]],tree[parent[c2]])
+            for num in c1_lst:
+                if c1 ==num:
+                    continue
+                tmp1.append(num)
+            for num in c2_lst:
+                if c2 ==num:
+                    continue
+                tmp2.append(num)
+            # 여기서 중복이 발생할 수도 있음.
+            tree[p1], tree[p2] = tmp1,tmp2
+            # print('AFTER')
+            # print(tree[parent[c1]],tree[parent[c2]])
+            parent[c1], parent[c2] = p2, p1
+        
     elif q.cmd ==500:
         c = q.other[0]
         ans = find_chat(c)
