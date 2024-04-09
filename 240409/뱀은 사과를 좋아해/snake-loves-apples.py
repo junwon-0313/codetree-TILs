@@ -24,6 +24,12 @@ for _ in range(k):
 for x,y in apple_lst:
     graph[x][y]=1
 
+def print_g():
+    print('####################')
+    for x in range(n+1):
+        for y in range(n+1):
+            print(graph[x][y], end = ' ')
+        print()
 def move():
     # 뱀 위치 표현
     head_pos = (1,1)
@@ -31,23 +37,23 @@ def move():
     time=0
     for direction, distance in move_lst:
         for _ in range(int(distance)):
+            # print_g()
             time+=1
             x,y = head_pos
             nx, ny = x+ d[direction][0], y+ d[direction][1]
             if not in_range(nx,ny):
                 print(time)
                 return
+            if graph[nx][ny]!=1: # 사과가 있을 때 -> 길이 +1
+                tail_x,tail_y = tail_pos.pop(0)
+                graph[tail_x][tail_y]=0
             if graph[nx][ny]==-1:
                 print(time)
                 return
-            if graph[nx][ny]==0:
-                tail_x,tail_y = tail_pos.pop(0)
-                graph[tail_x][tail_y]=0
-
+            
             head_pos = (nx,ny)
             tail_pos.append((nx,ny))
             graph[nx][ny]=-1
-            # 사과가 있을 때 -> 꼬리 +1
     else:
         print(time)
 move()
