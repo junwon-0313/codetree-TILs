@@ -53,7 +53,7 @@ def lazer(attack, target): # bfs 최단 거리
             return move_lst[:]
 
         for dx,dy in zip(dxs, dys):
-            nx, ny = (x+dx)%n, (y+dy)%m
+            nx, ny = (x+dx+n)%n, (y+dy+m)%m
             if graph[nx][ny]==0:
                 continue
             if visited[nx][ny]:
@@ -73,12 +73,14 @@ def count_tower():
     return cnt
 
 # 포탄
-def bomb(target, power):
+def bomb(target, power,attack):
     damaged =[target]
     x, y = target
     for dx, dy in zip([0,0,1,-1,1,1,-1,-1],[1,-1,0,0,1,-1,1,-1]):
-        nx, ny = (x+dx)%n, (y+dy)%m
+        nx, ny = (x+dx+n)%n, (y+dy+m)%m
         if graph[nx][ny]==0:
+            continue
+        if (nx,ny)==attack:
             continue
         damaged.append((nx,ny))
         graph[nx][ny]=max(graph[nx][ny]-power//2,0)
@@ -111,15 +113,15 @@ for time in range(1,k+1):
                     graph[x][y]+=1
     else:
         # print('BOMB')
-        damage_lst = bomb(target, power)
+        damage_lst = bomb(target, power, attack)
         for x in range(n):
             for y in range(m):
                 if graph[x][y]!=0 and (x,y) not in damage_lst and (x,y)!=attack:
                     graph[x][y]+=1
+    # print_g()
     if count_tower()==1:
         break
-
-
+    
 ans = 0
 for x in range(n):
     for y in range(m):
