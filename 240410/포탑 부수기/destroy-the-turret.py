@@ -68,7 +68,7 @@ def lazer(attack, target): # bfs 최단 거리
 
 # 포탄
 def bomb(target, power):
-    damaged =[(x,y)]
+    damaged =[target]
     x, y = target
     for dx, dy in zip([0,0,1,-1,1,1,-1,-1],[1,-1,0,0,1,-1,1,-1]):
         nx, ny = (x+dx)%n, (y+dy)%m
