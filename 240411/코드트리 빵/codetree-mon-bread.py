@@ -35,7 +35,7 @@ def find_route(k):
                 continue
             if graph[nx][ny]==-1:
                 continue
-            if visited[nx]ny]:
+            if visited[nx][ny]:
                 continue
             r.append((nx,ny))
             q.append(((nx,ny),r[:]))
