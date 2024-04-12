@@ -20,7 +20,7 @@ def find_distance(start,t):
     q =[]
     q.append((start[0],start[1],0))
     visited= [[False]*n for _ in range(n)]
-    visited[start[0]][start[1]]=True
+    # visited[start[0]][start[1]]=True
     while q:
         x,y,cnt = q.pop(0)
         if (x,y)==t:
@@ -35,7 +35,7 @@ def find_distance(start,t):
                 continue
             visited[nx][ny]=True
             q.append((nx,ny,cnt+1))
-    return 10000 # 도착 못했을 때
+    return 100000 # 도착 못했을 때
 
 
 def find_basecamp(t): # 목적지 편의점과 가까운 베이스 캠프 찾기
@@ -53,7 +53,7 @@ def find_route(k):
     q = []
     q.append((guest[k],[]))
     visited =[[False]*n for _ in range(n)]
-    visited[guest[k][0]][guest[k][1]]=True
+    # visited[guest[k][0]][guest[k][1]]=True
     while q:
         s, r = q.pop(0)
         x, y = s
@@ -71,6 +71,7 @@ def find_route(k):
             q.append(((nx,ny),r[:]))
             visited[nx][ny]=True
             r.pop()
+    print("ERROR")
 
 basecamp = [] # 베이스 캠프 관리
 for x in range(n):
@@ -86,7 +87,7 @@ while True:
     change_lst =[]
     # 이동가능한 사람 중에서 최단 거리 찾기
     for t in range(1,min(m+1,time+1)):
-        if arrived[t]: # 방문했다면
+        if arrived[t]: # 도착했다면
             continue
         # print('TARGET',t, target[t])
         if guest[t]!=(-1,-1):
@@ -99,14 +100,15 @@ while True:
                 cnt+=1
             else:
                 guest[t] = next_pos
-            if cnt==time-1:
-                for x, y in change_lst:
-                    graph[x][y]=-1
+          
         if guest[t]==(-1,-1): # t==time # 손님이 입장 전이라면 가까운 베이스 캠프로 입주 후, 이동
+            for x, y in change_lst:
+                    graph[x][y]=-1   
+                
             # 격자에 있는 사람들이 모두 없어지면 이동 불가 처리하기
             base_x, base_y = find_basecamp(target[t])
             guest[t] = (base_x,base_y)
-            graph[base_x][base_y]=-1
+            change_lst.append((base_x,base_y))
 
     for x, y in change_lst:
         graph[x][y]=-1
