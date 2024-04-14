@@ -100,7 +100,7 @@ for time in range(k):
                             total_cnt+=cnt
 
                 total_move.append((total_cnt,opt,raw,col))
-    first_cnt, first_opt, first_raw, first_col = sorted(total_move, key=lambda x:(-x[0],x[1],x[3],x[2]))[0] # 체크하기
+    first_cnt, first_opt, first_raw, first_col = sorted(total_move, key=lambda x:(-x[0],x[1],x[2],x[3]))[0] # 체크하기
     if first_cnt==0:
         break
     # 회전, 턴 점수, 2번 3번 반복
