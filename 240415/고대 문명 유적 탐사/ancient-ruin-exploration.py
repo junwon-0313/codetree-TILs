@@ -76,6 +76,7 @@ def copy(rotate_graph):
 
 
 block_idx=0
+score = []
 for time in range(k):
     # 처음 회전 찾기
     total_move = []
@@ -133,4 +134,10 @@ for time in range(k):
             block_idx+=1
     copy(rotate_graph)
 
-    print(turn_score, end =' ')
+    score.append(turn_score)
+
+for idx, s in enumerate(score):
+    if idx==len(score)-1:
+        print(s)
+    else:
+        print(s, end=' ')
