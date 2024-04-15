@@ -100,7 +100,7 @@ for time in range(k):
                             total_cnt+=cnt
 
                 total_move.append((total_cnt,opt,col,raw))
-    first_cnt, first_opt, first_raw, first_col = sorted(total_move, key=lambda x:(-x[0],x[1],x[2],x[3]))[0] # 체크하기
+    first_cnt, first_opt, first_col, first_raw = sorted(total_move, key=lambda x:(-x[0],x[1],x[2],x[3]))[0] # 체크하기
     if first_cnt==0:
         break
     # 회전, 턴 점수, 2번 3번 반복
@@ -135,7 +135,6 @@ for time in range(k):
     copy(rotate_graph)
 
     score.append(turn_score)
-
 
 for idx, s in enumerate(score):
     if idx==len(score)-1:
