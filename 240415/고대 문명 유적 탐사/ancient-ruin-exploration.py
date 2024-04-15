@@ -99,7 +99,7 @@ for time in range(k):
                         if cnt>=3:
                             total_cnt+=cnt
 
-                total_move.append((total_cnt,opt,raw,col))
+                total_move.append((total_cnt,opt,col,raw))
     first_cnt, first_opt, first_raw, first_col = sorted(total_move, key=lambda x:(-x[0],x[1],x[2],x[3]))[0] # 체크하기
     if first_cnt==0:
         break
@@ -136,8 +136,9 @@ for time in range(k):
 
     score.append(turn_score)
 
+
 for idx, s in enumerate(score):
     if idx==len(score)-1:
-        print(s)
+        print(s, end ='')
     else:
         print(s, end=' ')
