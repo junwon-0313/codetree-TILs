@@ -35,6 +35,6 @@ for time in range(t):
     ball =[]
     for x, y in new_ball:
         if new_ball.count((x,y))==1:
-            ball.append((x,y))
+            ball.append((x+1,y+1))
 
 print(len(ball))
