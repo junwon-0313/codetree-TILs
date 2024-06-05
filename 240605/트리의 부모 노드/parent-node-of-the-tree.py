@@ -13,7 +13,6 @@ for _ in range(n-1):
 
 for num in range(2,n+1):
     for k,v in tree.items():
-        for v_tems in v:
-            if v_tems==num:
-                print(k)
-                break
+        if num in v:
+            print(k)
+            break
